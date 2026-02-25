@@ -1,0 +1,51 @@
+I am building a full-stack SaaS application called Collabo.
+
+The backend is already production-ready using NestJS.
+Authentication is implemented with:
+
+- JWT access token
+- JWT refresh token
+- Tokens stored in HTTP-only cookies
+- Google OAuth handled fully by backend
+- Role-based access control already implemented
+
+I am now building the frontend using Next.js 14 App Router.Frontend must remain "dumb":
+   - It must not store JWT in localStorage or Zustand
+   - It must not decode JWT
+   - It must not manage authentication state manually
+   - Backend is the source of truth
+
+2. Authentication flow:
+   - If user is authenticated → redirect to /dashboard
+   - If user is NOT authenticated:
+       - accessing protected routes should redirect to /
+       - show landing page
+   - If user tries to access /login while authenticated → redirect to /dashboard
+
+3. Google login:
+   - Frontend button should redirect to backend /auth/google
+   - Backend handles OAuth and sets HTTP-only cookies
+   - Backend redirects back to frontend dashboard
+
+4. Implement middleware.ts in Next.js:
+   - Protect routes like /dashboard
+   - Redirect based on authentication cookie
+
+5. Implement:
+   - Login page
+   - Landing page
+   - Dashboard page (protected)
+   - Example of fetching authenticated user in a Server Component using cookies
+
+6. Show correct production-ready fetch configuration:
+   - credentials: "include"
+   - secure cookie handling
+   - no token exposure in frontend
+
+7. Explain clearly:
+   - Token lifecycle
+   - Cookie flow between browser and backend
+   - Why  global state management (like Zustand) is required for authentication
+   
+
+ 
